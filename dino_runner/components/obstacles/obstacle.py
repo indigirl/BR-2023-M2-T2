@@ -20,3 +20,4 @@ class Obstacle(Sprite):
     def draw(self, screen):
         screen.blit(self.image[self.type], (self.rect.x, self.rect.y))
 
+# o tipo do bird é só um, ja o cactus tem 3 tipos pequenos e 3 tipos grandes
