@@ -15,9 +15,9 @@ class Bird(Obstacle):
     def draw(self, screen):
         if self.step_index >= 9:
             self.step_index = 0
+        
         screen.blit(self.image[self.step_index//5], self.rect)
         self.step_index += 1
-        print(self.step_index)
 
  #caminho da imagem ObstacleManager> obstacle> bird
  #O Tipo será passado após a divisão, // pega apenas o primeiro numero inteiro, sem os decimais
