@@ -1,6 +1,6 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONT_STYLE
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONT_STYLE, DINO_DEAD
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacleManager import ObstacleManager
 
@@ -105,11 +105,10 @@ class Game:
         else:
             text = ("Press any key to RESTART")
             pos = (half_screen_width, half_screen_height)
-#self.screen.blit(ICON, (half_screen_width - 20, half_screen_height - 140))
-            self.draw_score()
-            self.draw_deaths()
+            self.restart()
         
         self.write_text(text, pos)
+        
         pygame.display.update() #ou .flip()
 
         self.handle_events_on_menu() 
@@ -120,6 +119,15 @@ class Game:
         text_rect = text.get_rect()
         text_rect.center = (pos)
         self.screen.blit(text, text_rect)
+
+    def restart(self):
+        self.game_speed = 20
+        self.score = 0
+        self.draw_score()
+        self.draw_deaths()
+        self.screen.blit(DINO_DEAD, (80, 310))
+
+
 
             ### Resetar a contagem de pontos e a velocidade quando jogo 'restartado'
             ### Criar método para remover a repetição de código para texto
