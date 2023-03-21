@@ -1,10 +1,8 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONT_STYLE
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacleManager import ObstacleManager
-
-FONT_STYLE = 'freesansbold.ttf'
 
 
 class Game:
@@ -79,11 +77,14 @@ class Game:
         self.x_pos_bg -= self.game_speed
 
     def draw_score(self):
-        font = pygame.font.Font(FONT_STYLE, 22)
-        text = font.render(f"Score: {self.score}", True, (0, 0, 0))
-        text_rect = text.get_rect()
-        text_rect.center = (1000, 50)
-        self.screen.blit (text, text_rect)
+        text = (f"Score: {self.score}")
+        pos = (1000, 50)
+        self.write_text(text, pos)
+
+    def draw_deaths(self):
+        text = (f"Deaths: {self.death_count}")
+        pos = (100, 50)
+        self.write_text(text, pos)
 
     def handle_events_on_menu(self):
         for event in pygame.event.get():
@@ -99,15 +100,28 @@ class Game:
         half_screen_width = SCREEN_WIDTH // 2
 
         if self.death_count == 0:
-            font = pygame.font.Font(FONT_STYLE, 22)
-            text = font.render("Press any key to start", True, (0, 0, 0))
-            text_rect = text.get_rect()
-            text_rect.center = (half_screen_width, half_screen_height)
-            self.screen.blit(text, text_rect)
+            text = ("Press any key to start")
+            pos = (half_screen_width, half_screen_height)
         else:
-            self.screen.blit(ICON, (half_screen_width - 20, half_screen_height - 140))
-
+            text = ("Press any key to RESTART")
+            pos = (half_screen_width, half_screen_height)
+#self.screen.blit(ICON, (half_screen_width - 20, half_screen_height - 140))
+            self.draw_score()
+            self.draw_deaths()
+        
+        self.write_text(text, pos)
         pygame.display.update() #ou .flip()
 
         self.handle_events_on_menu() 
+
+    def write_text(self, text, pos):
+        font = pygame.font.Font(FONT_STYLE, 22)
+        text = font.render(text, True, (0, 0, 0))
+        text_rect = text.get_rect()
+        text_rect.center = (pos)
+        self.screen.blit(text, text_rect)
+
+            ### Resetar a contagem de pontos e a velocidade quando jogo 'restartado'
+            ### Criar método para remover a repetição de código para texto
+
    
