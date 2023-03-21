@@ -1,6 +1,6 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONT_STYLE, DINO_DEAD
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONT_STYLE
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacleManager import ObstacleManager
 
@@ -18,6 +18,7 @@ class Game:
         self.x_pos_bg = 0
         self.y_pos_bg = 380
         self.score = 0
+        self.last_score = [0]
         self.death_count = 0
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
@@ -35,10 +36,13 @@ class Game:
         # Game loop: events - update - draw
         self.playing = True
         self.obstacle_manager.reset_obstacles()
+        self.restart()
         while self.playing:
             self.events()
             self.update()
             self.draw()
+        
+        self.last_score.append(self.score)
 
     def events(self):
         for event in pygame.event.get():
@@ -63,7 +67,8 @@ class Game:
         self.draw_background()
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
-        self.draw_score()
+        self.write_text(f"Score: {self.score}",(1000, 50))
+        self.write_text(f"Last score:  {self.last_score[-1]}",(800,50))
         pygame.display.update()
         pygame.display.flip()
 
@@ -75,16 +80,6 @@ class Game:
             self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
-
-    def draw_score(self):
-        text = (f"Score: {self.score}")
-        pos = (1000, 50)
-        self.write_text(text, pos)
-
-    def draw_deaths(self):
-        text = (f"Deaths: {self.death_count}")
-        pos = (100, 50)
-        self.write_text(text, pos)
 
     def handle_events_on_menu(self):
         for event in pygame.event.get():
@@ -100,14 +95,12 @@ class Game:
         half_screen_width = SCREEN_WIDTH // 2
 
         if self.death_count == 0:
-            text = ("Press any key to start")
-            pos = (half_screen_width, half_screen_height)
+            #self.screen.fill((255, 255, 255))
+            self.write_text("Press any key to start", (half_screen_width, half_screen_height))
         else:
-            text = ("Press any key to RESTART")
-            pos = (half_screen_width, half_screen_height)
-            self.restart()
-        
-        self.write_text(text, pos)
+            self.write_text("Press any key to RESTART", (half_screen_width, half_screen_height))
+            self.write_text(f"Deaths: {self.death_count}",(100, 50))
+            self.write_text(f"Score: {self.score}",(1000, 50))
         
         pygame.display.update() #ou .flip()
 
@@ -123,13 +116,11 @@ class Game:
     def restart(self):
         self.game_speed = 20
         self.score = 0
-        self.draw_score()
-        self.draw_deaths()
-        self.screen.blit(DINO_DEAD, (80, 310))
-
-
-
-            ### Resetar a contagem de pontos e a velocidade quando jogo 'restartado'
-            ### Criar método para remover a repetição de código para texto
+       
+       
+        #self.draw_score()
+        #self.draw_deaths()
+        ### Resetar a contagem de pontos e a velocidade quando jogo 'restartado'
+        ### Criar método para remover a repetição de código para texto
 
    
