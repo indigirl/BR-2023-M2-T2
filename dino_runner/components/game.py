@@ -103,12 +103,12 @@ class Game:
             elif event.type == pygame.KEYDOWN:
                 self.run()
 
-    def show_menu(self):
-        self.screen.fill((255, 255, 255))                            
+    def show_menu(self):                           
         half_screen_height = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
 
         if self.death_count == 0:
+            self.screen.fill((255, 255, 255)) 
             self.write_text("Press any key to START", (half_screen_width, half_screen_height))
         else:
             self.write_text("Press any key to RESTART", (half_screen_width, half_screen_height))

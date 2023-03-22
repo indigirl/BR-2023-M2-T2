@@ -1,9 +1,7 @@
 import random
 import pygame
 
-#from dino_runner.components.power_ups.shield import Shield
-#from dino_runner.components.power_ups.hammer import Hammer
-from dino_runner.utils.constants import HAMMER_TYPE, SHIELD_TYPE
+from dino_runner.utils.constants import HAMMER_TYPE, SHIELD_TYPE, MUSHROOM_TYPE
 from dino_runner.components.power_ups.power_up_chooser import RandomPowerUp
 
 
@@ -12,16 +10,12 @@ class PowerUpManager:
         self.power_ups = []
         self.when_appears = 0
 
-    def random_power_up(self):
-        self.type = 0
-        self.power_up = [RandomPowerUp()]
-        self.power_ups.append(self.power_up[self.type])
-
     def generate_power_up(self, score):
         if len(self.power_ups) == 0 and (self.when_appears == score):
-            random_power = random.randint(0, 1)
             self.when_appears += random.randint(200, 300)
-            self.random_power_up()
+            self.type = 0
+            self.power_up = [RandomPowerUp()]
+            self.power_ups.append(self.power_up[self.type])                                                #
     
     def update(self, score, game_speed, player):
         self.generate_power_up(score)
@@ -32,9 +26,15 @@ class PowerUpManager:
                 if power_up.type == HAMMER_TYPE:
                     player.hammer = True
                     player.shield = False
+                    player.mushroom = False
                 elif power_up.type == SHIELD_TYPE:
                     player.hammer = False
                     player.shield = True
+                    player.mushroom = False
+                elif power_up.type == MUSHROOM_TYPE:
+                    player.hammer = False
+                    player.shield = True
+                    player.mushroom = True
                 
                 player.has_power_up = True
                 player.type = power_up.type

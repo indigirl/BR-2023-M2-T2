@@ -27,10 +27,15 @@ RUNNING_HAMMER = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1Hammer.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2Hammer1.png")),
 ]
+RUNNING_BIG = [
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRunBig1.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRunBig2.png"))
+]
 
 JUMPING = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJump.png"))
 JUMPING_SHIELD = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJumpShield.png"))
 JUMPING_HAMMER = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJumpHammer.png"))
+JUMPING_BIG = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJumpBig.png"))
 
 DUCKING = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck1.png")),
@@ -45,6 +50,10 @@ DUCKING_SHIELD = [
 DUCKING_HAMMER = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck1Hammer.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck2Hammer.png")),
+]
+DUCKING_BIG = [
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuckBig1.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuckBig2.png"))   
 ]
 
 SMALL_CACTUS = [
@@ -66,6 +75,7 @@ BIRD = [
 CLOUD = pygame.image.load(os.path.join(IMG_DIR, 'Other/Cloud.png'))
 SHIELD = pygame.image.load(os.path.join(IMG_DIR, 'Other/shield.png'))
 HAMMER = pygame.image.load(os.path.join(IMG_DIR, 'Other/hammer.png'))
+MUSHROOM = pygame.image.load(os.path.join(IMG_DIR, 'Other/mushroom.png'))
 
 BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 
@@ -74,3 +84,5 @@ HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = "shield"
 HAMMER_TYPE = "hammer"
+MUSHROOM_TYPE = "mushroom"
+HEART_TYPE = "heart"
