@@ -26,10 +26,8 @@ class ObstacleManager:
                     game.playing = False
                     game.death_count += 1
                     break
-            else:
-                #arrumar para aparecer obstaculos
-                #self.obstacles.remove(obstacle)
-                pass
+                else:
+                    self.obstacles.remove(obstacle)
 
     def draw(self, screen):
         for obstacle in self.obstacles:
