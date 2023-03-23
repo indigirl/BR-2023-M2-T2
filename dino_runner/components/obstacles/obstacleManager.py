@@ -37,9 +37,11 @@ class ObstacleManager:
                     game.game_speed = 20 
                 elif game.player.type == MUSHROOM_TYPE:
                         game.game_speed = 20
-                        continue
+                        if game.score >= 500:
+                            self.obstacles.remove(obstacle)
+                        else:
+                            continue
                         
-
     def draw(self, screen):
         for obstacle in self.obstacles:
             obstacle.draw(screen)

@@ -5,6 +5,7 @@ from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacleManager import ObstacleManager
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
 
+
 class Game:
     def __init__(self):
         pygame.init()
@@ -110,7 +111,6 @@ class Game:
     def show_menu(self):                           
         half_screen_height = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
-
         if self.death_count == 0:
             self.screen.fill((255, 255, 255)) 
             self.write_text("Press any key to START", (half_screen_width, half_screen_height), BLACK)
@@ -135,7 +135,6 @@ class Game:
         if self.death_count > 0:
             self.write_text(f"Deaths: {self.death_count}",(150, 50), PURPLE)
 
-    
     def restart_screen(self):
         self.write_text("Press any key to RESTART", (550, 500), GREEN)
         self.show_text()

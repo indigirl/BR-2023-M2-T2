@@ -6,9 +6,10 @@ if __name__ == "__main__":
 
 
 #velocidade reduzida para teste, dino hammer e jogo
-
+#falta cloud
 #colocar som
-
+ 
+ #corrigido posiçao do big
  #mudar fonte
  #imagem game over
 
