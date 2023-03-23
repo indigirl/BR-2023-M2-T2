@@ -1,6 +1,6 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONT_STYLE, DEFAULT_TYPE, GAME_OVER, RESET, DINO_DEAD, DINO_START, GREEN, BLACK, PURPLE
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONT_STYLE, DEFAULT_TYPE, GAME_OVER, RESET,HEART, DINO_DEAD, DINO_START, GREEN, BLACK, PURPLE
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.cloud import Cloud
 from dino_runner.components.obstacles.obstacleManager import ObstacleManager
@@ -22,6 +22,7 @@ class Game:
         self.score = 0
         self.best_score = 0                               #
         self.death_count = 0
+        self.lives = 3
         self.cloud = Cloud() #
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
@@ -80,6 +81,7 @@ class Game:
         self.obstacle_manager.draw(self.screen)
         self.cloud.draw(self.screen) #
         self.show_text()
+        self.show_lives()
         self.draw_power_up_time()
         self.power_up_manager.draw(self.screen)
         pygame.display.update()
@@ -113,8 +115,6 @@ class Game:
 
     def show_menu(self):                           
         self.screen.fill((255, 255, 255))
-        half_screen_height = SCREEN_HEIGHT // 2
-        half_screen_width = SCREEN_WIDTH // 2
         if self.death_count == 0:
             self.start_screen()
         else:
@@ -139,17 +139,34 @@ class Game:
             self.write_text(f"You died: {self.death_count} times",(200, 50), PURPLE)
 
     def start_screen(self):
+        self.show_lives()
         self.write_text("Press any key to START", (550, 300), BLACK)
         self.screen.blit(DINO_START, (80, 310))
         self.screen.blit(BG, (self.x_pos_bg, self.y_pos_bg))
 
     def restart_screen(self):
+        self.show_lives()
         self.write_text("Press any key to RESTART", (550, 500), GREEN)
         self.show_text()
         self.screen.blit(RESET, (510, 200)) 
         self.screen.blit(GAME_OVER, (360, 300))
         self.screen.blit(DINO_DEAD, (80, 310))
         self.screen.blit(BG, (0, 380))
+
+    def show_lives(self):
+        if self.death_count == 0:
+            self.screen.blit(HEART, (100, 70))
+            self.screen.blit(HEART, (130, 70))
+            self.screen.blit(HEART, (160, 70))
+        elif self.death_count == 1:
+            self.screen.blit(HEART, (100, 70))
+            self.screen.blit(HEART, (130, 70))
+        elif self.death_count == 2:
+            self.screen.blit(HEART, (100, 70))
+        elif self.death_count == 3:
+            self.best_score = 0
+            self.death_count = 0
+
 
 
 
