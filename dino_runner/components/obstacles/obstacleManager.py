@@ -4,7 +4,6 @@ import random
 from dino_runner.utils.constants import SHIELD_TYPE, HAMMER_TYPE, MUSHROOM_TYPE, HEART_TYPE
 from dino_runner.components.obstacles.cactus import Cactus
 from dino_runner.components.obstacles.bird import Bird
-from dino_runner.components.dinosaur import Dinosaur
 
 
 class ObstacleManager:
@@ -37,7 +36,7 @@ class ObstacleManager:
                     game.game_speed = 20 
                 elif game.player.type == MUSHROOM_TYPE:
                         game.game_speed = 20
-                        if game.score >= 500:
+                        if game.score >= 1000:
                             self.obstacles.remove(obstacle)
                         else:
                             continue

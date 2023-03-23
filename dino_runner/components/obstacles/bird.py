@@ -3,7 +3,7 @@ import random
 from dino_runner.utils.constants import BIRD
 from dino_runner.components.obstacles.obstacle import Obstacle
 
-BIRD_HEIGHTS = [250, 290]
+BIRD_HEIGHTS = [250, 290, 300]
 
 
 class Bird(Obstacle):

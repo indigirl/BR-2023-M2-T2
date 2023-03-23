@@ -14,7 +14,6 @@ IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
 
 # Assets Constants
 ICON = pygame.image.load(os.path.join(IMG_DIR, "DinoWallpaper.png"))
-DINO_DEAD = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDead.png"))
 
 RUNNING = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1.png")),
@@ -81,6 +80,7 @@ HAMMER = pygame.image.load(os.path.join(IMG_DIR, 'Other/hammer.png'))
 MUSHROOM = pygame.image.load(os.path.join(IMG_DIR, 'Other/mushroom.png'))
 GAME_OVER = pygame.image.load(os.path.join(IMG_DIR, 'Other/GameOver.png'))
 RESET = pygame.image.load(os.path.join(IMG_DIR, 'Other/Reset.png'))
+DINO_DEAD = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDead.png"))
 
 BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 
@@ -91,3 +91,4 @@ SHIELD_TYPE = "shield"
 HAMMER_TYPE = "hammer"
 MUSHROOM_TYPE = "mushroom"
 HEART_TYPE = "heart"
+DEAD_TYPE = "dead"

@@ -6,12 +6,13 @@ if __name__ == "__main__":
 
 
 #velocidade reduzida para teste, dino hammer e jogo
-#falta cloud
+
 #colocar som
  
- #corrigido posiçao do big
- #mudar fonte
+ #corrigido posiçao do big, direto no dino
+ #fonte
  #imagem game over
+ #cloud
 
  #implementado heart, só reduz velocidade quando colide cm obstaculo
  #mushroom em desenvolvimento
