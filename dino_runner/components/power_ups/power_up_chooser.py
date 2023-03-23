@@ -12,5 +12,5 @@ POWER_OPTIONS = [
 
 class RandomPowerUp(PowerUp):
     def __init__(self):
-        self.image, self.type = POWER_OPTIONS[random.randint(0, 1)]
+        self.image, self.type = POWER_OPTIONS[random.randint(0, 3)]
         super().__init__(self.image, self.type)

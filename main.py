@@ -6,6 +6,8 @@ if __name__ == "__main__":
 
 
 #velocidade reduzida para teste, dino hammer e jogo
+
+#colocar som
 #mudar fonte
 #imagem game over
 
@@ -16,5 +18,5 @@ if __name__ == "__main__":
 
  #corrigido caminhos das imagens
  #implementado power_up_choseer
- #implementado heart
+ #implementado heart, só reduz velocidade quando colide cm obstaculo
  #mushroom em desenvolvimento

@@ -127,6 +127,7 @@ class Game:
 
     def show_text(self):
         self.write_text(f"Score: {self.score}",(1000, 50))
+        self.write_text(f"Game speed:  {self.game_speed}",(400,65))
 
         if self.death_count > 0:
             self.write_text(f"Deaths: {self.death_count}",(100, 50))
