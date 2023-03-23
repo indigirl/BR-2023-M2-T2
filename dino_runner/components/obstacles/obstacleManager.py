@@ -4,6 +4,7 @@ import random
 from dino_runner.utils.constants import SHIELD_TYPE, HAMMER_TYPE, MUSHROOM_TYPE, HEART_TYPE
 from dino_runner.components.obstacles.cactus import Cactus
 from dino_runner.components.obstacles.bird import Bird
+from dino_runner.components.dinosaur import Dinosaur
 
 
 class ObstacleManager:
@@ -28,18 +29,16 @@ class ObstacleManager:
                     game.death_count += 1
                     break
                 elif game.player.type == SHIELD_TYPE:
-                    game.playing = True
+                    continue                              #game.playing = True
                 elif game.player.type == HAMMER_TYPE:
-                    pygame.time.delay(500)
                     self.obstacles.remove(obstacle)
                 elif game.player.type == HEART_TYPE:
+                    game.death_count = 0
                     game.game_speed = 20 
-                elif game.player.type == MUSHROOM_TYPE:                      
-                    dino_choice = random.randint(0, 1)
-                    if dino_choice == 0:
-                        game.playing = True
-                    elif dino_choice == 1:
-                        self.obstacles.remove(obstacle)
+                elif game.player.type == MUSHROOM_TYPE:
+                        game.game_speed = 20
+                        continue
+                        
 
     def draw(self, screen):
         for obstacle in self.obstacles:

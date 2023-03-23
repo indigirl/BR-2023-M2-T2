@@ -1,6 +1,6 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONT_STYLE, DEFAULT_TYPE
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONT_STYLE, DEFAULT_TYPE, GAME_OVER, RESET, GREEN, BLACK, PURPLE
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacleManager import ObstacleManager
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
@@ -18,7 +18,7 @@ class Game:
         self.x_pos_bg = 0
         self.y_pos_bg = 380
         self.score = 0
-        self.last_score = 0                               #
+        self.best_score = 0                               #
         self.death_count = 0
         
         self.player = Dinosaur()
@@ -39,7 +39,8 @@ class Game:
         self.playing = True
         self.obstacle_manager.reset_obstacles()
         self.power_up_manager.reset_power_ups()
-        self.restart()                                        #
+        self.game_speed = 20
+        self.score = 0                                      #
         while self.playing:
             self.events()
             self.update()
@@ -62,8 +63,11 @@ class Game:
 
     def update_score(self):
         self.score += 1
-        if self.score % 300 == 0:
-            self.game_speed += 5
+        if self.score % 100 == 0:
+            self.game_speed += 3
+
+        if self.score >= self.best_score:
+            self.best_score = self.score
 
     def draw(self):
         self.clock.tick(FPS)
@@ -75,7 +79,7 @@ class Game:
         self.draw_power_up_time()
         self.power_up_manager.draw(self.screen)
         pygame.display.update()
-        pygame.display.flip()
+        pygame.display.flip() 
 
     def draw_background(self):
         image_width = BG.get_width()
@@ -88,9 +92,9 @@ class Game:
 
     def draw_power_up_time(self):
         if self.player.has_power_up:
-            time_to_show = round((self.player.power_up_time - pygame.time.get_ticks()) / 1000, 2)
+            time_to_show = round((self.player.power_up_time - pygame.time.get_ticks()) / 1000, 1)
             if time_to_show >= 0:
-                self.write_text(f"{self.player.type.capitalize()} enabled for {time_to_show} seconds", (500, 40))#SE NAO FUNCIONAR USAR DA RUBI
+                self.write_text(f"{self.player.type.capitalize()} enabled for {time_to_show} seconds", (550, 90), GREEN)
             else:
                 self.player.has_power_up = False
                 self.player.type = DEFAULT_TYPE
@@ -109,35 +113,35 @@ class Game:
 
         if self.death_count == 0:
             self.screen.fill((255, 255, 255)) 
-            self.write_text("Press any key to START", (half_screen_width, half_screen_height))
+            self.write_text("Press any key to START", (half_screen_width, half_screen_height), BLACK)
         else:
-            self.write_text("Press any key to RESTART", (half_screen_width, half_screen_height))
-            self.show_text()                                                                              #
+            self.restart_screen()                                                                           
         
         pygame.display.update() #ou .flip()
 
         self.handle_events_on_menu() 
 
-    def write_text(self, text, pos):   #receber mais parametros                         #
-        font = pygame.font.Font(FONT_STYLE, 22)
-        text = font.render(text, True, (0, 0, 0))
+    def write_text(self, text, pos, color):   #receber mais parametros
+        font = pygame.font.Font(FONT_STYLE, 18)
+        text = font.render(text, True, color)
         text_rect = text.get_rect()
         text_rect.center = (pos)
         self.screen.blit(text, text_rect)
 
     def show_text(self):
-        self.write_text(f"Score: {self.score}",(1000, 50))
-        self.write_text(f"Game speed:  {self.game_speed}",(400,65))
+        self.write_text(f"Score: {self.score}",(950, 50), GREEN)
+        self.write_text(f"Best score: {self.best_score}",(700,50), GREEN)
 
         if self.death_count > 0:
-            self.write_text(f"Deaths: {self.death_count}",(100, 50))
+            self.write_text(f"Deaths: {self.death_count}",(150, 50), PURPLE)
 
-        if self.playing:
-            self.write_text(f"Last score:  {self.last_score}",(800,50)) # last score e score no restart sempre vai ser igual
     
-    def restart(self):
-        self.game_speed = 20
-        self.score = 0
+    def restart_screen(self):
+        self.write_text("Press any key to RESTART", (550, 500), GREEN)
+        self.show_text()
+        self.screen.blit(RESET, (510, 200)) 
+        self.screen.blit(GAME_OVER, (360, 300))
+
 
 
    

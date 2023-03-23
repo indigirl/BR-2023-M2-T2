@@ -6,10 +6,12 @@ from dino_runner.utils.constants import RUNNING, JUMPING, DUCKING, DEFAULT_TYPE,
 DUCK_IMG = {DEFAULT_TYPE: DUCKING, HEART_TYPE: DUCKING, SHIELD_TYPE:DUCKING_SHIELD, HAMMER_TYPE: DUCKING_HAMMER, MUSHROOM_TYPE: DUCKING_BIG}
 RUN_IMG =  {DEFAULT_TYPE: RUNNING, HEART_TYPE: RUNNING, SHIELD_TYPE:RUNNING_SHIELD, HAMMER_TYPE: RUNNING_HAMMER, MUSHROOM_TYPE: RUNNING_BIG}
 JUMP_IMG = {DEFAULT_TYPE: JUMPING, HEART_TYPE: JUMPING, SHIELD_TYPE:JUMPING_SHIELD, HAMMER_TYPE: JUMPING_HAMMER, MUSHROOM_TYPE: JUMPING_BIG}
+#BIG_IMG = {MUSHROOM_TYPE: RUNNING_BIG}
 
 X_POS = 80
 Y_POS = 310
 Y_POS_DUCK = 340
+#Y_POS_BIG = 250 #bom para o duck
 JUMP_VEL = 8.5
 
 
@@ -29,9 +31,8 @@ class Dinosaur(Sprite):
 
     def setup_state(self):
         self.has_power_up = False
-        self.shield = False
         self.show_text = False
-        self.shield_time_up = 0
+        self.power_up_time = 0
 
     def update(self, user_input):
         if self.dino_run:
@@ -41,7 +42,7 @@ class Dinosaur(Sprite):
         elif self.dino_ducking:
             self.duck()
 
-        if (user_input[pygame.K_UP] or user_input[pygame.K_SPACE]) and not self.dino_jump:
+        if (user_input[pygame.K_UP] or user_input[pygame.K_SPACE]) #and not self.dino_jump:
             self.dino_jump = True
             self.dino_run = False
             self.dino_ducking = False
@@ -58,10 +59,10 @@ class Dinosaur(Sprite):
             self.step_index = 0
 
     def run(self):
-        self.image = RUN_IMG[self.type][self.step_index // 5]
+        self.image = RUN_IMG[self.type][self.step_index // 5]# if self.type != "mushroom" else BIG_IMG[self.type][self.step_index // 5]
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = X_POS
-        self.dino_rect.y = Y_POS
+        self.dino_rect.y = Y_POS# if self.type != "mushroom" else Y_POS_BIG
         self.step_index += 1
 
     def jump(self):
