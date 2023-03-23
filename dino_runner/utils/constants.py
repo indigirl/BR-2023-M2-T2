@@ -81,6 +81,7 @@ MUSHROOM = pygame.image.load(os.path.join(IMG_DIR, 'Other/mushroom.png'))
 GAME_OVER = pygame.image.load(os.path.join(IMG_DIR, 'Other/GameOver.png'))
 RESET = pygame.image.load(os.path.join(IMG_DIR, 'Other/Reset.png'))
 DINO_DEAD = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDead.png"))
+DINO_START = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoStart.png"))
 
 BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 

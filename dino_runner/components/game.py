@@ -1,6 +1,6 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONT_STYLE, DEFAULT_TYPE, GAME_OVER, RESET, GREEN, BLACK, PURPLE
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONT_STYLE, DEFAULT_TYPE, GAME_OVER, RESET, DINO_DEAD, DINO_START, GREEN, BLACK, PURPLE
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.cloud import Cloud
 from dino_runner.components.obstacles.obstacleManager import ObstacleManager
@@ -112,11 +112,11 @@ class Game:
                 self.run()
 
     def show_menu(self):                           
+        self.screen.fill((255, 255, 255))
         half_screen_height = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
         if self.death_count == 0:
-            self.screen.fill((255, 255, 255)) 
-            self.write_text("Press any key to START", (half_screen_width, half_screen_height), BLACK)
+            self.start_screen()
         else:
             self.restart_screen()                                                                           
         
@@ -136,13 +136,20 @@ class Game:
         self.write_text(f"Best score: {self.best_score}",(700,50), GREEN)
 
         if self.death_count > 0:
-            self.write_text(f"Deaths: {self.death_count}",(150, 50), PURPLE)
+            self.write_text(f"You died: {self.death_count} times",(200, 50), PURPLE)
+
+    def start_screen(self):
+        self.write_text("Press any key to START", (550, 300), BLACK)
+        self.screen.blit(DINO_START, (80, 310))
+        self.screen.blit(BG, (self.x_pos_bg, self.y_pos_bg))
 
     def restart_screen(self):
         self.write_text("Press any key to RESTART", (550, 500), GREEN)
         self.show_text()
         self.screen.blit(RESET, (510, 200)) 
         self.screen.blit(GAME_OVER, (360, 300))
+        self.screen.blit(DINO_DEAD, (80, 310))
+        self.screen.blit(BG, (0, 380))
 
 
 
